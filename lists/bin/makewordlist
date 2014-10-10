@@ -1,0 +1,279 @@
+#!/usr/bin/perl
+#
+# Programmer:    Craig Stuart Sapp <craig.stanford.edu>
+# Creation Date: Sat Oct  4 23:05:48 PDT 2014
+# Last Modified: Sat Oct  4 23:05:48 PDT 2014
+# Filename:      /disk/data2/craig-project/arabic/lists/makewordlist
+# Syntax:        perl 5
+#
+# Description:
+#
+
+use strict;
+
+my @dirs = @ARGV;
+my $content;
+
+print "[\n";
+
+my $i;
+my $dir;
+for ($i=0; $i<@dirs; $i++) {
+   $dir = $dirs[$i];
+   $content = processDir($dir);
+   print $content;
+   if ($i < $#dirs) {
+      print (",\n");
+   }
+}
+
+print "\n]\n";
+
+exit(0);
+
+###########################################################################
+
+
+##############################
+##
+## printList --
+##
+
+sub printList {
+   my ($dir, $file) = @_;
+   my $out = "";
+   open (LFILE, "$dir/$file") or die;
+   my @contents = <LFILE>;
+   close LFILE;
+   $out .= "\t{\n";
+
+   my $listtitle = getListTitle(\@contents);
+   $out .= "\t\t\"listtitle\"\t:\t\"" . escapeQuotes($listtitle) . "\",\n";
+
+   $out .= "\t\t\"entries\"\t:\n";
+   $out .= "\t\t[";
+
+   my $ei   = -1;
+   my $ai   = -1;
+   my $a2i  = -1;
+   my $a3i  = -1;
+   my $aurl = -1;
+   my $i;
+   my $entries = 0;
+
+   my $line;
+   my @data;
+   my $found;
+   for ($i=0; $i<@contents; $i++) {
+      $line = $contents[$i];
+      chomp $line;
+      next if $line =~ /^\s*$/;
+      next if $line =~ /^!/;
+      if ($line =~ /^\*\*/) {
+         ($ei, $ai, $a2i, $a3i, $aurl) = getColumnIndexes($line);
+      }
+      next if $line =~ /^\*/;
+      @data = split(/\t/, $line);
+      $found = 0;
+
+      if (($ai >=0) && ($data[$ai] !~ /^\.$/)) {
+         if (!$found) {
+            $out .= "," if $entries++ > 0;
+            $out .= "\n\t\t\t{\n";
+         } else {
+            $out .= ",\n" if $found;
+         }
+         $out .= "\t\t\t\"arabic\"\t:\t\"" . escapeQuotes($data[$ai]) . "\"";
+         $found = 1;
+      }
+
+      if (($a2i >=0) && ($data[$a2i] !~ /^\.$/)) {
+         if (!$found) {
+            $out .= "," if $entries++ > 0;
+            $out .= "\n\t\t\t{\n";
+         } else {
+            $out .= ",\n" if $found;
+         }
+         $out .= "\t\t\t\"arabic2\"\t:\t\"" . escapeQuotes($data[$a2i]) . "\"";
+         $found = 1;
+      }
+
+      if (($a3i >=0) && ($data[$a3i] !~ /^\.$/)) {
+         if (!$found) {
+            $out .= "," if $entries++ > 0;
+            $out .= "\n\t\t\t{\n";
+         } else {
+            $out .= ",\n" if $found;
+         }
+         $out .= "\t\t\t\"arabic3\"\t:\t\"" . escapeQuotes($data[$a3i]) . "\"";
+         $found = 1;
+      }
+
+      if (($aurl >=0) && ($data[$aurl] !~ /^\.$/)) {
+         if (!$found) {
+            $out .= "," if $entries++ > 0;
+            $out .= "\n\t\t\t{\n";
+         } else {
+            $out .= ",\n" if $found;
+         }
+         $out .= "\t\t\t\"aurl\"\t\t:\t\"" . escapeQuotes($data[$aurl]) . "\"";
+         $found = 1;
+      }
+
+      if (($ei >=0) && ($data[$ei] !~ /^\.$/)) {
+         if (!$found) {
+            $out .= "," if $entries++ > 0;
+            $out .= "\n\t\t{\n";
+         } else {
+            $out .= ",\n" if $found;
+         }
+         $out .= "\t\t\t\"english\"\t:\t\"" . escapeQuotes($data[$ei]) . "\"";
+         $found = 1;
+      }
+
+      $out .= "\n\t\t}" if $found;
+   }
+
+   $out .= "\t\t]\n";
+   $out .= "\t}";
+   return $out;
+}
+
+
+
+##############################
+##
+## getColumnIndexes --
+##
+
+sub getColumnIndexes {
+   my ($line) = @_;
+   my @fields = split(/\t/, $line);
+   my %ind;
+   my $counter = 0;
+   foreach my $item (@fields) {
+      $ind{$item} = $counter++;
+   }
+
+   my $ei   = -1;
+   my $ai   = -1;
+   my $a2i  = -1;
+   my $a3i  = -1;
+   my $aurl = -1;
+
+   $ei   = $ind{"**english"} if $ind{"**english"} !~ /^\s*$/;
+   $ai   = $ind{"**arabic"}  if $ind{"**arabic"}  !~ /^\s*$/;
+   $a2i  = $ind{"**arabic2"} if $ind{"**arabic2"} !~ /^\s*$/;
+   $a3i  = $ind{"**arabic3"} if $ind{"**arabic3"} !~ /^\s*$/;
+   $aurl = $ind{"**aurl"}    if $ind{"**aurl"}    !~ /^\s*$/;
+
+   return ($ei, $ai, $a2i, $a3i, $aurl);
+}
+
+
+
+##############################
+##
+## processDir --
+##
+
+sub processDir {
+   my ($dir) = @_;
+   my $out = "";
+   my $grouptitle = getGroupTitle($dir);
+   $out .= "{\n";
+   $out .= "\t\"grouptitle\"\t:\t\"" .  escapeQuotes($grouptitle) . "\",\n";
+   $out .= "\t\"lists\"\t\t:\n";
+   my @lists = getListFiles($dir);
+   my $list;
+   $out .= "\t[\n";
+   for (my $i=0; $i<@lists; $i++) {
+      $out .= printList($dir, $lists[$i]);
+      $out .= "," if $i < $#lists;
+      $out .= "\n";
+   }
+   $out .= "\t]\n";
+   $out .= "}";
+
+   return $out;
+}
+
+
+
+#############################
+##
+## getListFiles --
+##
+
+sub getListFiles {
+   my ($dir) = @_;
+   my @output;
+   opendir(LFDIR, $dir) or die;
+   while (my $file = readdir(LFDIR)) {
+      next if $file =~ /^\./;
+      next if -d "$dir/$file";
+      next if !-r "$dir/$file";
+      next if $file !~ /\.list$/;
+      $output[@output] = $file;
+
+   }
+   closedir LFDIR;
+   return sort @output;
+}
+
+
+
+#############################
+##
+## getGroupTitle --
+##
+
+sub getGroupTitle {
+   my ($dir) = @_;
+   open (GTFILE, "$dir/.title") || return "Untitled group";
+   while (my $line = <GTFILE>) {
+      next if $line =~ /^\s*$/;
+      chomp $line;
+      close GTFILE;
+      return $line;
+   }
+   close GTFILE;
+   return "Untitled group";
+}
+
+
+
+#############################
+##
+## escapeQuotes --
+##
+
+sub escapeQuotes {
+   my ($string) = @_;
+   $string =~ s/"/&quot;/g;
+   return $string;
+}
+
+
+
+#############################
+##
+## getListTitle --
+##
+
+sub getListTitle {
+   my ($cont) = @_;
+   my $i;
+   my $line;
+   for ($i=0; $i<@$cont; $i++) {
+      $line = $$cont[$i];
+      if ($line =~ /^!!!OTL:\s*(.*)\s*$/) {
+         return $1;
+      }
+   }
+ 
+   return "Untitled list"
+}
+
+
+

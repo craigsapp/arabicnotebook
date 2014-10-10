@@ -1,0 +1,975 @@
+<script src='/js/scripts-common.js'></script>
+<script>
+//
+// Programmer:		Craig Stuart Sapp <craig@ccrma.stanford.edu>
+// Creation Date:	Sun Oct  5 01:07:45 PDT 2014
+// Last Modified:	Thu Oct  9 12:18:23 PDT 2014
+// Filename:		.../scripts-local.html
+// Web Address:	http://arabic.sapp.org/scripts-local.html
+// Syntax:			JavaScript 1.8/ECMAScript 5
+// vim:				ts=3: ft=javascript
+//
+// Description:   JavaScript management of the Arabic Notebook homepage.
+//
+
+var CURRENTGROUP  = 0;		// Current group to display.
+var CURRENTLIST   = 0;		// Current list in group to display.
+var MIRROR        = 0; 		// True if Arabic translit. should be mirrored.
+var RANDOMIZE     = 0;		// True if list should be shown in random order.
+var SEARCHRESULTS = [];		// List of last/current search results.
+var SEARCHSTRING 	= '';		// Query string for last/current search.
+var SEARCHDISPLAY = 0;		// True if currently displaying search results list.
+var TABLELIMIT    = 200;	// Maximum search results (or any list) size.
+var ORDER         = 0;		// English/Arabic column order in list.
+var VISIBILITYarabic  = 1;	// True if Arabic column is visible.
+var VISIBILITYenglish = 1;	// True if English column is visible.
+var SHOW1			= 1;		// True if Arabic translation should be shown.
+var SHOW2			= 1;		// True if Arabic with vocalizations should be shown.
+var SHOW3			= 1;		// True if Arabic without vocalizations is shown.
+
+// The current group and list indexes are stored persistently so that
+// the last list displayed in the previous session will be reloaded:
+if (!localStorage.CURRENTGROUP) {
+	localStorage.CURRENTGROUP = CURRENTGROUP;
+}
+if (!localStorage.CURRENTLIST) {
+	localStorage.CURRENTLIST = CURRENTLIST;
+}
+CURRENTGROUP = parseInt(localStorage.CURRENTGROUP);
+CURRENTLIST  = parseInt(localStorage.CURRENTLIST);
+
+// Also remember the Arabic words display style between sessions:
+if (!!localStorage.SHOW1) { SHOW1 = parseInt(localStorage.SHOW1); }
+if (!!localStorage.SHOW2) { SHOW2 = parseInt(localStorage.SHOW2); }
+if (!!localStorage.SHOW3) { SHOW3 = parseInt(localStorage.SHOW3); }
+localStorage.SHOW1 = SHOW1;
+localStorage.SHOW2 = SHOW2;
+localStorage.SHOW3 = SHOW3;
+
+
+//////////////////////////////
+//
+// DOMContentLoaded event -- run this function when document has
+//      finished loading.
+//
+
+document.addEventListener('DOMContentLoaded', function() {
+	DecorateHeaderFooterLinks();
+	displayWordlists(document.getElementById('wordlists'));
+	if (localStorage.FORCESEARCHONLOAD === '1') {
+		showForcedSearch();
+	} else {
+		showList(CURRENTGROUP, CURRENTLIST);
+	}
+}, false);
+
+
+
+//////////////////////////////
+//
+// showForcedSearch -- A search was requested from the /search page,
+//    so do a search rather than display a specific wordlist.
+//
+
+function showForcedSearch() {
+   localStorage.FORCESEARCHONLOAD = '0';
+	document.getElementById('searchfield').value = localStorage.SEARCHSTRING;
+	doSearch();
+}
+
+
+
+//////////////////////////////
+//
+// doSearch -- Search through the vocabulary entries for matches
+// to the query string coming from #searchfield's value.
+//
+
+function doSearch() {
+	InitializeWordlist();
+
+	var ss = document.getElementById('searchfield').value;
+   var ss = ss.replace(/h/ig, '[h7]');  // for 7=ح 
+   var ss = ss.replace(/s/ig, '[s9]');  // for 9=ص
+   var ss = ss.replace(/t/ig, '[t6]');  // for 6=ط
+	var re = new RegExp(ss, 'i');
+	var filteredentries = [];
+	var matches = [];
+	var matches;
+	var i, j, k;
+	var string;
+
+   for (i=0; i<WORDLISTS.length; i++) {
+		var grouplists = WORDLISTS[i].lists;
+		for (j=0; j<grouplists.length; j++) {
+			var entries = grouplists[j].entries;
+			for (k=0; k<entries.length; k++) {
+				var entry = entries[k];
+				if (!entry) {
+					continue;
+				}
+				string = entry.english;
+				matches = re.exec(string);
+				if (!matches) {
+					string = entry.arabic;
+					matches = re.exec(string);
+					if (!matches) {
+						string = entry.arabic2;
+						matches = re.exec(string);
+						if (!matches) {
+							string = entry.arabic3;
+							matches = re.exec(string);
+							if (!matches) {
+								continue;
+							}
+						}
+					}
+				}
+				entry.groupindex = i;
+				entry.listindex = j;
+				filteredentries.push(entry);
+			}
+		}
+	}
+
+	SEARCHRESULTS = filteredentries;
+	displaySearchResults(filteredentries, ss);
+}
+
+
+
+//////////////////////////////
+//
+// displaySearchResults -- Replaced the DOM content for #showlist
+// 	with the search results list.
+//
+
+function displaySearchResults(entries, searchstring) {
+	SEARCHSTRING = searchstring;
+
+	var elem    = document.getElementById('showlist');
+	var section = document.createElement('section');
+	elem.innerHTML = '';
+   elem.appendChild(section);
+	section.className = 'about first';
+	var i;
+   var header = document.createElement('h2');
+	section.appendChild(header);
+
+   if (entries.length == 0) {
+		header.textContent = 'No matches';
+		return;
+	}
+
+   if (searchstring.match(/^\s*$/)) {
+		header.textContent = 'All vocabulary';
+	} else {
+		header.textContent = 'Search results for "' + searchstring + '"';
+	}
+
+   var table = document.createElement("table");
+	section.appendChild(table);
+	table.className = "wordlist";
+
+	var row = document.createElement("tr");
+	table.appendChild(row);
+
+	var ecell = document.createElement("th");
+	ecell.addEventListener("click", function() {
+		toggleEnglishDisplay();
+	});
+	ecell.style.textAlign	= "center";
+	ecell.textContent			= "English";
+
+	var acell = document.createElement("th");
+	acell.addEventListener("click", function() {
+		toggleArabicDisplay();
+	});
+	acell.style.textAlign	= "center";
+	acell.className			= "xmirror";
+	acell.textContent			= "Arabic";
+
+	if (ORDER) {
+		row.appendChild(ecell);
+		row.appendChild(acell);
+	} else {
+		row.appendChild(acell);
+		row.appendChild(ecell);
+	}
+
+   var listcell = document.createElement("th");
+	listcell.style.textAlign = "center";
+	listcell.textContent = "List";
+   row.appendChild(listcell);
+
+	var sequence = new Array(entries.length);
+	for (i=0; i<sequence.length; i++) {
+		sequence[i] = i;
+	}
+	if (RANDOMIZE) {
+		sequence = shuffle(sequence);
+	}
+	var entry;
+	var counter = 0;
+	for (i=0; i<sequence.length; i++) {
+		counter++;
+		entry = entries[sequence[i]];
+		row = createEntry(entry, entry.groupindex, entry.listindex);
+		table.appendChild(row);
+		if ((TABLELIMIT > 0) && (counter > TABLELIMIT)) {
+			break;
+		}
+	}
+
+	if ((TABLELIMIT > 0) && (counter < sequence.length)) {
+		var note = document.createElement("p");
+		note.textContent = "Search results truncated.";
+		section.append(note);
+	}
+
+	// SEARCHDISPLAY set to true so that when running a reformatting
+	// command (such as A,E,F,D, or M), the search list is displayed
+	// instead of the currently selected word list.
+	SEARCHDISPLAY = 1;
+}
+
+
+
+//////////////////////////////
+//
+// displayWordlists -- Show the word lists in the database in
+//		wordlists/all.json.  Content is placed into #wordlists.
+//
+
+function displayWordlists(target) {
+	if (!target) {
+		console.log("Error: #wordlist does not exist on page.");
+		return;
+	} else {
+		target.innerHTML = "";
+	}
+
+	InitializeWordlist();
+
+	if (CURRENTGROUP >= WORDLISTS.length || CURRENTGROUP < 0) {
+		CURRENTGORUP = 0;
+		localStorage.CURRENTGROUP = 0;
+	}
+	if (CURRENTLIST >= WORDLISTS[CURRENTGROUP].lists.length || CURRENTLIST < 0) {
+		CURRENTLIST = 0;
+		localStorage.CURRENTLIST = 0;
+	}
+
+	var out = '';
+	var i, j;
+	var group, groupheader, grouplist;
+	var list, li;
+
+   for (i=0; i<WORDLISTS.length; i++) {
+		group = WORDLISTS[i];
+   	groupheader = document.createElement("h2");
+   	target.appendChild(groupheader);
+   	groupheader.className = "first group";
+		groupheader.textContent = (i+1) + '. ' + group.grouptitle;
+		if (CURRENTGROUP == i) {
+   		grouplist = document.createElement("ol");
+			grouplist.style.fontSize		= "75%";
+			grouplist.style.marginBottom	= "0";
+			grouplist.style.marginTop		= "0";
+			grouplist.style.marginLeft		= "10px";
+
+			for (j=0; j<group.lists.length; j++) {
+				list = group.lists[j];				
+				li = document.createElement("li");
+				li.textContent = list.listtitle;
+				li.className = "pointer";
+				if ((i == CURRENTGROUP) && (j == CURRENTLIST)) {
+						li.style.color = "#d7ab5b";
+				}
+				(function(i, j) {
+					li.addEventListener("click", function() {
+						showList(i, j);
+					});
+				})(i, j);
+				grouplist.appendChild(li);
+			}
+
+			groupheader = document.createElement("h2");
+			groupheader.appendChild(grouplist);
+			target.appendChild(groupheader);
+		} else {
+			groupheader.className += " pointer";
+			(function(i, j) {
+				groupheader.addEventListener("click", function() {
+					showList(i, 0);
+				});
+			})(i, j);
+		}
+	}
+}
+
+
+
+//////////////////////////////
+//
+// showList -- Display the currently selected work list.
+// 
+
+function showList(groupindex, listindex) {
+	InitializeWordlist();
+
+   // Double check that the indices are in bounds:
+   if (groupindex >= WORDLISTS.length || groupindex < 0) {
+		groupindex = 0;
+	}
+   if (listindex >= WORDLISTS[groupindex].lists.length || listindex < 0) {
+		listindex = 0;
+	}
+
+   // Store the indicies of the currently displaying indices so that
+   // the same list will be displayed when the browser re-loads.
+	CURRENTGROUP = groupindex;
+	CURRENTLIST  = listindex;
+	localStorage.CURRENTGROUP = CURRENTGROUP;
+	localStorage.CURRENTLIST  = CURRENTLIST
+
+	displayWordlists(document.getElementById('wordlists'));
+
+	elem = document.getElementById('showlist');
+   var section = document.createElement('section');
+   elem.innerHTML = '';
+   elem.appendChild(section);
+	section.className = 'about first';
+
+	var list = WORDLISTS[groupindex].lists[listindex];
+	var entries = list.entries;
+	var i;
+	var header = document.createElement('h2');
+	section.appendChild(header);
+	header.style.letterSpacing = '1px';
+	header.style.fontWeight = '900';
+	header.style.fontFamily = '"Handlee", serif';
+	header.textContent = list.listtitle;
+   var table = document.createElement("table");
+   elem.appendChild(table);
+	table.className = "wordlist";
+	var row = document.createElement("tr");
+
+	var ecell = document.createElement('th');
+	ecell.addEventListener('click', function() {
+		toggleEnglishDisplay();
+	}, false);
+	ecell.textContent = 'English';
+
+	var acell = document.createElement('th');
+	acell.addEventListener('click', function() {
+		toggleArabicDisplay();
+	}, false);
+	var span = document.createElement('span')
+	acell.appendChild(span);
+	span.textContent = 'Arabic';
+
+	if (ORDER) {
+		row.appendChild(ecell);
+		row.appendChild(acell);
+	} else {
+		row.appendChild(acell);
+		row.appendChild(ecell);
+	}
+	table.appendChild(row);
+
+	var sequence = new Array(entries.length);
+	for (i=0; i<sequence.length; i++) {
+		sequence[i] = i;
+	}
+	if (RANDOMIZE) {
+		sequence = shuffle(sequence);
+	}
+	var entry;
+	for (i=0; i<sequence.length; i++) {
+		entry = entries[sequence[i]];
+		row = createEntry(entry);
+		table.appendChild(row);
+	}
+
+	SEARCHDISPLAY = 0;
+}
+
+
+
+//////////////////////////////
+//
+// createEntry -- Generate an HTML row in the list/search result table.
+//
+
+function createEntry(entry, gid, lid) {
+   var row = document.createElement('tr');
+	var ecell = createEnglishCell(entry);
+	var acell = createArabicCell(entry);
+
+	if (ORDER) {
+		row.appendChild(ecell);
+		row.appendChild(acell);
+	} else {
+		row.appendChild(acell);
+		row.appendChild(ecell);
+	}
+
+	if (typeof gid !== 'undefined') {
+		var listcell = document.createElement('td');
+		var span    = document.createElement('span');
+		listcell.appendChild(span);
+		span.className = 'pointer text-link';
+		span.setAttribute('title', WORDLISTS[gid].grouptitle + ': ' + 
+			WORDLISTS[gid].lists[lid].listtitle);
+		(function(gid, lid) {
+			span.addEventListener('click', function() {
+				showList(gid, lid);
+			}, false);
+		})(gid, lid);
+		span.textContent = (parseInt(gid) + 1) + ',' + (parseInt(lid) + 1);
+	}
+
+	return row;
+}
+
+
+
+//////////////////////////////
+//
+// createEnglishCell --
+//
+
+function createEnglishCell(entry) {
+	var ecell = document.createElement("td");
+	ecell.className = "english-cell";
+	ecell.addEventListener('click', function(event) {
+		toggleVisibility(ecell, event);
+	}, false);
+	var span = document.createElement("span");
+	ecell.appendChild(span);
+	span.innerHTML = formatEnglish(entry.english);
+	return ecell;
+}
+
+
+
+//////////////////////////////
+//
+// createArabicCell --
+//
+
+function createArabicCell(entry) {
+	var acell = document.createElement("td");
+	acell.className = "arabic-cell";
+	acell.addEventListener('click', function(event) {
+		toggleVisibility(acell, event);
+	}, false);
+
+	var out = '';
+	var afound = 0;
+
+	if ((!!entry.arabic) && SHOW1) {
+		if (!!entry.aurl) {
+			out += formatArabic(entry.arabic, entry.aurl);
+		} else {
+			out += formatArabic(entry.arabic);
+		}
+		afound = 1;
+	} 
+
+	if ((!!entry.arabic3) && SHOW3) {
+		if (afound) {
+			// out += '<br>\n';
+		} 
+		out += formatArabic3(entry.arabic3);
+		afound = 1;
+	}
+
+	if ((!!entry.arabic2) && SHOW2) {
+		if (afound) {
+			// out += '<br>\n';
+		} 
+		out += formatArabic2(entry.arabic2);
+		afound = 1;
+	}
+
+	acell.innerHTML = out;
+	return acell;
+}
+
+
+
+//////////////////////////////
+//
+// toggleVisiblility -- Toggle visibility, or if coming from an onclick event 
+// 	with shift-key pressed down.
+//
+
+function toggleVisibility(element, e) {
+	if (!!e) {
+		if (e.shiftKey || e.altKey || e.metaKey || e.ctrlKey) {
+			return;	
+		}
+		e.preventDefault();
+		var children = element.querySelectorAll('*');
+		for (var i=0; i<children.length; i++) {
+			if (children[i].style.visibility === 'hidden') {
+				children[i].style.visibility = 'visible';
+			} else {
+				children[i].style.visibility = 'hidden';
+			}
+		}
+	}
+}
+
+
+
+//////////////////////////////
+//
+// shuffle -- Mix up an array of items.
+//
+
+function shuffle(sequence) {
+	var ci = sequence.length;
+	var tval;
+	var ri;
+	while (0 !== ci) {
+		ri = Math.floor(Math.random() * ci);
+		ci -= 1;
+		tval = sequence[ci];
+		sequence[ci] = sequence[ri];
+		sequence[ri] = tval;
+	}
+	return sequence;
+}
+
+
+
+//////////////////////////////
+//
+// formatEnglish -- Prepare an English word/phrase for the word list table.
+//
+
+function formatEnglish(string) {
+	var out = '';
+	out += '<span ';
+	if (!VISIBILITYenglish) {
+		out += ' style="visibility:hidden" ';
+	}
+	out += 'class="english-text">' + string + '</span>';
+	return out;
+}
+
+
+
+//////////////////////////////
+//
+// formatArabic -- aa = a macron, etc.
+//
+// http://webdesign.about.com/library/bl_htmlcodes.htm
+//
+
+function formatArabic(string, url) {
+   var ss = string;
+	ss = ss.replace(/7/g, '<span style="color:red;">H</span>');
+	ss = ss.replace(/9/g, '<span style="color:red;">S</span>');
+	ss = ss.replace(/6/g, '<span style="color:red;">T</span>');
+	ss = ss.replace(/aa/g, '&#x101;');
+	ss = ss.replace(/ii/g, '&#x12b;');
+	ss = ss.replace(/uu/g, '&#x16b;');
+
+	var out = '';
+	out += '<span class="arabic-text xmirror"';
+	if (!VISIBILITYarabic) {
+		out += ' style="visibility:hidden" ';
+	}
+	out += '>';
+
+	if (!url) {
+		return  out + ss + '</span>';
+	}
+	return out + '<a target="new" href="' + url + '">' + ss + '</a></span>';
+}
+
+
+
+//////////////////////////////
+//
+// formatArabic2 -- Prepare Arabic text with diacritics for the word
+// 		list table.
+//
+
+function formatArabic2(string) {
+	var out = '';
+	out += '<span ';
+	if (!VISIBILITYarabic) {
+		out += ' style="visibility:hidden" ';
+	}
+	out += ' class="arabic2-text">' + string + '</span>';
+	return out;
+}
+
+
+
+//////////////////////////////
+//
+// formatArabic3 -- Prepare Arabic text without diacritics for the
+// 		word list table.
+//
+
+function formatArabic3(string) {
+	var out = '';
+	out += '<span ';
+	if (!VISIBILITYarabic) {
+		out += ' style="visibility:hidden" ';
+	}
+	out += ' class="arabic3-text">' + string + '</span>';
+	return out;
+}
+
+
+
+//////////////////////////////
+//
+// displayNextWordList -- Find the next word list in the group and display.
+// 		If already at the last list in the last group, then go to the 
+//    	first one list in the first group.
+//
+
+function displayNextWordList() {
+	var gi = CURRENTGROUP || 0;
+	var li = CURRENTLIST  || 0;
+	var lsize = WORDLISTS[gi].lists.length;
+	var gsize = WORDLISTS.length;
+	var newli = li + 1;
+   var newgi = gi;
+
+	if (newli >= lsize) {
+		newli = 0;
+		newgi += 1;
+	}
+   if (newgi >= gsize) {
+      newgi = 0;
+   }
+
+	showList(newgi, newli);
+}
+
+
+
+//////////////////////////////
+//
+// displayPreviousWordList -- Find the previous word list in the group
+// 		and display.  If already at the first list, then go to the last one.
+//
+
+function displayPreviousWordList() {
+	var gi = CURRENTGROUP || 0;
+	var li = CURRENTLIST  || 0;
+	var lsize = WORDLISTS[gi].lists.length;
+	var gsize = WORDLISTS.length;
+	var newli = li - 1;
+	var newgi = gi;
+
+	if (newli < 0) {
+		newgi -= 1;
+		if (newgi < 0) {
+			newgi = gsize -1;
+		}
+	   lsize = WORDLISTS[newgi].lists.length;
+		newli = lsize - 1;
+	} 
+
+	showList(newgi, newli);
+}
+
+
+
+//////////////////////////////
+//
+// displayNextGroup -- Find the next group and display.
+// 		If already at the last group, then go to the first one.
+//
+
+function displayNextGroup() {
+	var gi = CURRENTGROUP || 0;
+	var gsize = WORDLISTS.length;
+	var newgi = gi + 1;
+	if (newgi >= gsize) {
+		newgi = 0;
+	}
+	showList(newgi, 0);
+}
+
+
+
+//////////////////////////////
+//
+// displayPreviousGroup -- Find the previous word list in the group
+// 		and display.  If already at the first list, then go to the last one.
+//
+
+function displayPreviousGroup() {
+	var gi = CURRENTGROUP || 0;
+	var gsize = WORDLISTS.length;
+	var newgi = gi - 1;
+	if (newgi < 0) {
+		newgi = gsize - 1;
+	}
+	showList(newgi, 0);
+}
+
+
+
+//////////////////////////////
+//
+// toggleRandomDisplay --
+//
+
+function toggleRandomDisplay() {
+	RANDOMIZE = !RANDOMIZE;
+	displayCurrentList();
+}
+
+
+
+//////////////////////////////
+//
+// toggleMirrorDisplay --
+//
+
+function toggleMirrorDisplay() {
+	MIRROR = !MIRROR;
+	if (MIRROR) {
+		var elements = document.getElementsByClassName('xmirror');
+		while (elements.length) {
+			elements[0].className = 
+					elements[0].className.replace(/\bxmirror\b/g, 'mirror');
+		}
+	} else {
+		var elements = document.getElementsByClassName('mirror');
+		while (elements.length) {
+			elements[0].className = 
+					elements[0].className.replace(/\bmirror\b/g, 'xmirror');
+		}
+	}
+}
+
+
+
+//////////////////////////////
+//
+// keydown Event -- What to do when the user pressed a keyboard button.
+//
+
+window.addEventListener('keydown', function(event) {
+	var keycode	= event.keyCode;
+
+	if (event.metaKey) {
+		// Don't mess with meta key combinations (command key in OS X)
+		return;
+	}
+
+	var searchfield = document.getElementById('searchfield');
+	if ((searchfield === document.activeElement) && !event.ctrlKey) {
+		// When typing a search the regular letter commands are not
+		// active.  Instead, they use the control key.  For example
+		// 'R' randomizes the current list when not searching, but
+		// user 'control-R' when in the search box to do the same thing.
+		return false;
+	}
+
+	switch (keycode) {
+
+		case AKey:   // toggle visibility of Arabic word column
+			toggleArabicDisplay();
+			break;
+
+		case CKey:   // clear the word list from the local cache
+			WORDLISTS = null;
+			localStorage.removeItem('WORDLISTS');
+			break;
+
+		case EKey:   // toggle visibility of English word column
+			toggleEnglishDisplay();
+			break;
+
+		case FKey:   // switch the columns of English and Arabic words
+			toggleDisplayOrder();
+			break;
+
+		case MKey:   // toggle reverse display of Arabic transliterations
+			toggleMirrorDisplay();
+			break;
+
+		case RKey:   // toggle shuffling the wordlist into random order
+			toggleRandomDisplay();
+			break;
+
+		case XKey:   // switch visibility of Arabic/English word columns
+			toggleEnglishDisplay();
+			toggleArabicDisplay();
+			break;
+
+		case OneKey:   // toggle display of Arabic transliterations
+			SHOW1 = !SHOW1;
+			displayCurrentList();
+			break;
+
+		case TwoKey:   // toggle display of Arabic with diacriticals
+			SHOW2 = !SHOW2;
+			displayCurrentList();
+			break;
+
+		case ThreeKey:	  // toggle display of Arabic without diacriticals
+			SHOW3 = !SHOW3;
+			displayCurrentList();
+			break;
+
+		case BackspaceKey:   // clear text from the search box
+			if (event.ctrlKey) {
+				clearSearchBox();
+			}
+
+		case UpArrowKey:   // go to the previous word list
+			if (event.shiftKey) {
+				displayPreviousWordList();
+			}
+			break;
+
+		case DownArrowKey:   // go to the next word list
+			if (event.shiftKey) {
+				displayNextWordList();
+			}
+			break;
+
+		case LeftArrowKey:   // go to the previous word group
+			if (event.shiftKey) {
+				displayPreviousGroup();
+			}
+			break;
+
+		case RightArrowKey:   // go to the next word group
+			if (event.shiftKey) {
+				displayNextGroup();
+			}
+			break;
+
+	}
+
+});
+
+
+
+//////////////////////////////
+//
+// clearSearchBox -- Erase the contents of the search box and change
+// 		focus to the search box.  This is called from the keydown 
+// 		event listener when control-backspace is pressed.
+//
+
+function clearSearchBox() {
+	var box = document.getElementById('searchfield');
+	box.value = '';
+	UpdateEzMark();
+	box.focus();
+	doSearch();
+}
+
+
+
+//////////////////////////////
+//
+// toggleArabicDisplay -- Hide or show Arabic table cells.
+//
+
+function toggleArabicDisplay() {
+	VISIBILITYarabic  = !VISIBILITYarabic;
+	var cells = document.querySelectorAll('.arabic-cell');
+	for (var i=0; i<cells.length; i++) {
+		if (VISIBILITYarabic) {
+			showCell(cells[i]);
+		} else {
+			hideCell(cells[i]);
+		}
+	}
+}
+
+
+
+//////////////////////////////
+//
+// showCell -- Make a table cell in the word list/search results visible.
+//
+
+function showCell(element) {
+	var children = element.querySelectorAll('*');
+	for (var i=0; i<children.length; i++) {
+		children[i].style.visibility = 'visible';
+	}
+}
+
+
+
+//////////////////////////////
+//
+// hideCell -- Make a table cell in the word list/search results invisible.
+//
+
+function hideCell(element) {
+	var children = element.querySelectorAll('*');
+	for (var i=0; i<children.length; i++) {
+		children[i].style.visibility = 'hidden';
+	}
+}
+
+
+
+//////////////////////////////
+//
+// toggleEnglishDisplay -- Make English table cells either visible or not.
+//
+
+function toggleEnglishDisplay() {
+	VISIBILITYenglish = !VISIBILITYenglish;
+	var cells = document.querySelectorAll('.english-cell');
+	for (var i=0; i<cells.length; i++) {
+		if (VISIBILITYenglish) {
+			showCell(cells[i]);
+		} else {
+			hideCell(cells[i]);
+		}
+	}
+}
+
+
+
+//////////////////////////////
+//
+// toggleDisplayOrder -- Switch the order of Arabic and English 
+// 		word list columns.
+//
+
+function toggleDisplayOrder() {
+   ORDER = !ORDER;
+   displayCurrentList();
+}
+
+
+
+//////////////////////////////
+//
+// displayCurrentList -- (Re)display the current wordlist.
+//
+
+function displayCurrentList() {
+	if (SEARCHDISPLAY) {
+		displaySearchResults(SEARCHRESULTS, SEARCHSTRING);
+	} else {
+		showList(CURRENTGROUP, CURRENTLIST);
+	}
+}
+
+
+</script>

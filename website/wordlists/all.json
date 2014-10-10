@@ -1,0 +1,783 @@
+[
+{
+	"grouptitle"	:	"Basic vocabulary",
+	"lists"		:
+	[
+	{
+		"listtitle"	:	"Phrases",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"mar7abaa",
+			"arabic2"	:	"مَرْحَبَا",
+			"arabic3"	:	"مرحبا",
+			"aurl"		:	"http://www.salaamarabic.com/item/1346/en",
+			"english"	:	"hello (Aramaic: mar-Habaa &quot;God-love&quot;)"
+		},
+			{
+			"arabic"	:	"as-salaamu 3alaykum",
+			"arabic2"	:	"السّلامُ عَلَيكُمْ",
+			"arabic3"	:	"السلام عليكم",
+			"aurl"		:	"http://en.wikipedia.org/wiki/As-salamu_alaykum",
+			"english"	:	"peace be upon you"
+		},
+			{
+			"arabic"	:	"wa 3alaykum as-salaamu",
+			"arabic2"	:	"وَعَلَيكُمْ السّلامَ",
+			"arabic3"	:	"وعليكم السلام",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Wa_alaykumu_s-salam",
+			"english"	:	"and upon you peace"
+		},
+			{
+			"arabic"	:	"9abaa7 al-khayr",
+			"arabic2"	:	"صَباح الخَير",
+			"arabic3"	:	"صباح الخير",
+			"aurl"		:	"http://www.salaamarabic.com/item/7873/en",
+			"english"	:	"good morning"
+		},
+			{
+			"arabic"	:	"9abaa7 an-nur",
+			"arabic2"	:	"صَباح النُور",
+			"arabic3"	:	"صباح النور",
+			"english"	:	"good morning response (morning of light)"
+		},
+			{
+			"arabic"	:	"masaa' al-khayr",
+			"arabic2"	:	"مَساء الخَير",
+			"arabic3"	:	"مساء الخير",
+			"english"	:	"good evening"
+		},
+			{
+			"arabic"	:	"masaa' an-nur",
+			"arabic2"	:	"مَساء النُور",
+			"arabic3"	:	"مساء النور",
+			"english"	:	"good evening response (evening of light)"
+		},
+			{
+			"arabic"	:	"ahlan wa sahlan",
+			"arabic2"	:	"أهلاً وَسَهْلاً!",
+			"arabic3"	:	"أهلا وسهلا!",
+			"aurl"		:	"http://www.wikihow.com/Greet-in-Arabic",
+			"english"	:	"Welcome!"
+		},
+			{
+			"arabic"	:	"ahlan bik",
+			"arabic3"	:	"اهلا بك",
+			"aurl"		:	"http://www.arabiangazette.com/explore-arabia-amalia-greetings",
+			"english"	:	"welcome response (M)"
+		},
+			{
+			"arabic"	:	"ahlan biki",
+			"arabic3"	:	"اهلا بكِ",
+			"aurl"		:	"http://www.arabiangazette.com/explore-arabia-amalia-greetings",
+			"english"	:	"welcome response (F)"
+		},
+			{
+			"arabic"	:	"ahlan bikum",
+			"arabic3"	:	"اهلا بكم",
+			"aurl"		:	"http://www.arabiangazette.com/explore-arabia-amalia-greetings",
+			"english"	:	"welcome response (MMFF)"
+		},
+			{
+			"arabic"	:	"in sha allah",
+			"arabic2"	:	"إن شاء الله",
+			"arabic3"	:	"إن شاء الله",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Insha'Allah",
+			"english"	:	"I hope so, maybe &quot;If God wills&quot;"
+		},
+			{
+			"arabic"	:	"tasharrafnaa",
+			"arabic2"	:	"تَشَرَّفنا",
+			"arabic3"	:	"تشرفنا",
+			"aurl"		:	"https://plus.google.com/107007018674623108062/posts/LKMa1xJ9k6x",
+			"english"	:	"pleased to meet you &quot;we are honored&quot;"
+		},
+			{
+			"arabic"	:	"kayf al-7al?",
+			"arabic3"	:	"كيف الحال؟",
+			"aurl"		:	"http://www.arabiangazette.com/explore-arabia-amalia-greetings",
+			"english"	:	"How are you? (&quot;How's the situation&quot;)"
+		},
+			{
+			"arabic"	:	"al-7amdu lillah",
+			"arabic3"	:	"الحمد الله",
+			"aurl"		:	"http://arabicwithoutwalls.ucdavis.edu/aww/alifbaa_unit3/ab3_phrases_vocab.html",
+			"english"	:	"I am fine (&quot;Praise God&quot;)"
+		},
+			{
+			"arabic"	:	"min faDHlak",
+			"arabic3"	:	"من فضلك",
+			"aurl"		:	"http://www.salaamarabic.com/item/1348/en",
+			"english"	:	"please"
+		},
+			{
+			"arabic"	:	"shukran",
+			"arabic2"	:	"شُكْراً",
+			"arabic3"	:	"شكرا",
+			"english"	:	"thanks"
+		},
+			{
+			"arabic"	:	"3afwan",
+			"arabic2"	:	"عفواً",
+			"arabic3"	:	"عفوا",
+			"english"	:	"your're welcome"
+		},
+			{
+			"arabic"	:	"tafaDDal",
+			"arabic3"	:	"تفضّل",
+			"english"	:	"please (M; do something)"
+		},
+			{
+			"arabic"	:	"tafaDDali",
+			"arabic3"	:	"تفضّلي",
+			"english"	:	"please (F; do something)"
+		},
+			{
+			"arabic"	:	"na3am",
+			"arabic2"	:	"نَعَم",
+			"arabic3"	:	"نعم",
+			"aurl"		:	"http://wikitravel.org/en/Jordanian_Arabic_phrasebook",
+			"english"	:	"yes"
+		},
+			{
+			"arabic"	:	"laa",
+			"arabic2"	:	"لا",
+			"arabic3"	:	"لا",
+			"english"	:	"no"
+		},
+			{
+			"arabic"	:	"mumtaaz/ah",
+			"arabic2"	:	"مُمْتاز",
+			"arabic3"	:	"ممتاز",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Mumtaz",
+			"english"	:	"excellent"
+		},
+			{
+			"arabic"	:	"hunaa",
+			"arabic2"	:	"هُنا",
+			"arabic3"	:	"هنا",
+			"english"	:	"here"
+		}		]
+	},
+	{
+		"listtitle"	:	"Nouns",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"kitaab",
+			"arabic2"	:	"كِتَاب",
+			"arabic3"	:	"كتاب",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Kitab",
+			"english"	:	"book"
+		},
+			{
+			"arabic"	:	"6aalib/ah",
+			"arabic3"	:	"طالب/طالبة",
+			"aurl"		:	"http://arabicclass.wordpress.com/2008/01/06/word-of-the-day-%D8%B7%D8%A7%D9%84%D8%A8-taalib-student/",
+			"english"	:	"student"
+		},
+			{
+			"arabic"	:	"ustaadh/ah",
+			"arabic3"	:	"أستاذ",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Ustad",
+			"english"	:	"teacher"
+		},
+			{
+			"arabic"	:	"rajul",
+			"arabic2"	:	"رجُل",
+			"arabic3"	:	"رجل",
+			"aurl"		:	"http://www.salaamarabic.com/item/32771/en",
+			"english"	:	"man"
+		},
+			{
+			"arabic"	:	"bayt",
+			"arabic2"	:	"بَيْت",
+			"arabic3"	:	"بيت",
+			"aurl"		:	"http://arabic.desert-sky.net/house.html",
+			"english"	:	"house"
+		},
+			{
+			"arabic"	:	"9adiiq",
+			"arabic2"	:	"صَدِيق",
+			"arabic3"	:	"صديق",
+			"aurl"		:	"http://www.languageguru.net/post/43658107198/arabic-words-friend",
+			"english"	:	"friend"
+		},
+			{
+			"arabic"	:	"qalam",
+			"arabic2"	:	"قَلَم",
+			"arabic3"	:	"قلم",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Qalam",
+			"english"	:	"pen"
+		},
+			{
+			"arabic"	:	"ism",
+			"arabic2"	:	"اِسْم",
+			"arabic3"	:	"اسم",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Arabic_name#Ism",
+			"english"	:	"name"
+		},
+			{
+			"arabic"	:	"kaaliifuurniiaa",
+			"arabic2"	:	"كاليفورنيا",
+			"arabic3"	:	"كاليفورنيا",
+			"english"	:	"California"
+		}		]
+	},
+	{
+		"listtitle"	:	"Subject pronouns",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"anaa",
+			"arabic2"	:	"أنا",
+			"arabic3"	:	"أنا",
+			"aurl"		:	"http://arabic.speak7.com/arabic_pronouns.htm",
+			"english"	:	"I"
+		},
+			{
+			"arabic"	:	"anta",
+			"arabic2"	:	"أنتَ",
+			"arabic3"	:	"أنت",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Arabic_grammar#Personal_pronouns",
+			"english"	:	"you (M)"
+		},
+			{
+			"arabic"	:	"anti",
+			"arabic2"	:	"أنتِ",
+			"arabic3"	:	"أنت",
+			"aurl"		:	"http://www.salaamarabic.com/item/27100/en",
+			"english"	:	"you (F)"
+		},
+			{
+			"arabic"	:	"huwa",
+			"arabic2"	:	"هُوَ",
+			"arabic3"	:	"هو",
+			"english"	:	"he"
+		},
+			{
+			"arabic"	:	"hiya",
+			"arabic2"	:	"هِيَ",
+			"arabic3"	:	"هي",
+			"aurl"		:	"http://www.salaamarabic.com/item/25759/en",
+			"english"	:	"she"
+		},
+			{
+			"arabic"	:	"na7nu",
+			"arabic2"	:	"نَحْنُ",
+			"arabic3"	:	"نحن ",
+			"aurl"		:	"http://www.salaamarabic.com/item/27371/en",
+			"english"	:	"we"
+		},
+			{
+			"arabic"	:	"antum",
+			"arabic2"	:	"أنْتُم",
+			"arabic3"	:	"انتن",
+			"aurl"		:	"http://www.salaamarabic.com/item/28286/en",
+			"english"	:	"y'all"
+		},
+			{
+			"arabic"	:	"hum",
+			"arabic2"	:	"هُم",
+			"arabic3"	:	"هم",
+			"aurl"		:	"http://www.salaamarabic.com/item/28740/en",
+			"english"	:	"they"
+		}		]
+	},
+	{
+		"listtitle"	:	"Adjectives",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"amriikii/ah",
+			"arabic3"	:	"الأمريكي",
+			"english"	:	"American"
+		},
+			{
+			"arabic"	:	"3arabii/ah",
+			"arabic3"	:	"عربي",
+			"english"	:	"Arab(ic)"
+		},
+			{
+			"arabic"	:	"lubnaanii",
+			"arabic3"	:	"لبناني",
+			"english"	:	"Lebanese"
+		},
+			{
+			"arabic"	:	"faransii/ah",
+			"arabic3"	:	"فرنسي",
+			"english"	:	"French"
+		},
+			{
+			"arabic"	:	"6awiil/ah",
+			"arabic2"	:	"طَويل",
+			"arabic3"	:	"طويل",
+			"english"	:	"tall"
+		},
+			{
+			"arabic"	:	"qa9iir/ah",
+			"arabic2"	:	"قَصير",
+			"arabic3"	:	"قصير",
+			"english"	:	"short"
+		},
+			{
+			"arabic"	:	"jamiil/ah",
+			"arabic2"	:	"جَميل",
+			"arabic3"	:	"جميل",
+			"aurl"		:	"http://www.wikihow.com/Say-Beautiful-in-Arabic",
+			"english"	:	"beautiful"
+		},
+			{
+			"arabic"	:	"dhakii/ah",
+			"arabic2"	:	"ذَكي",
+			"arabic3"	:	"ذكي",
+			"aurl"		:	"http://www.memrise.com/mem/2650611/i-have-dhakii-to-be-clever/",
+			"english"	:	"intelligent"
+		},
+			{
+			"arabic"	:	"kibiir",
+			"arabic2"	:	"كِبير",
+			"arabic3"	:	"كبير",
+			"aurl"		:	"http://arabic.desert-sky.net/g_adj.html",
+			"english"	:	"big"
+		}		]
+	},
+	{
+		"listtitle"	:	"Possessives",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"+ii",
+			"arabic2"	:	"+ي",
+			"arabic3"	:	"+ي",
+			"english"	:	"my"
+		},
+			{
+			"arabic"	:	"+uka",
+			"arabic2"	:	"كَ",
+			"arabic3"	:	"كَ",
+			"english"	:	"your (M)"
+		},
+			{
+			"arabic"	:	"+uki",
+			"arabic2"	:	"كِ",
+			"arabic3"	:	"ـكِ",
+			"english"	:	"you (F)"
+		},
+			{
+			"arabic"	:	"+uhu",
+			"arabic2"	:	"هُ",
+			"arabic3"	:	"ـه",
+			"english"	:	"his"
+		},
+			{
+			"arabic"	:	"+uhaa",
+			"arabic2"	:	"ها.",
+			"arabic3"	:	"ـها",
+			"english"	:	"her"
+		},
+			{
+			"arabic"	:	"+unaa",
+			"arabic2"	:	"نا",
+			"arabic3"	:	"ـنا",
+			"english"	:	"our"
+		},
+			{
+			"arabic"	:	"+ukum",
+			"arabic2"	:	"كُم",
+			"arabic3"	:	"ـكم",
+			"english"	:	"yall's"
+		},
+			{
+			"arabic"	:	"+uhum",
+			"arabic2"	:	"هُم",
+			"arabic3"	:	"ـهم",
+			"english"	:	"their"
+		}		]
+	},
+	{
+		"listtitle"	:	"Prepositions",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"min",
+			"arabic2"	:	"مِن",
+			"arabic3"	:	"من",
+			"aurl"		:	"http://arabicwordaday.wordpress.com/2007/07/02/%D9%85%D9%90%D9%86%D9%92%D9%92-min-%E2%80%93-arabic-word-a-day/",
+			"english"	:	"from"
+		},
+			{
+			"arabic"	:	"ila",
+			"arabic2"	:	"إلَى",
+			"arabic3"	:	"إلى",
+			"aurl"		:	"http://www.arabictree.com/prepositions-huruwf-ul-jarr/",
+			"english"	:	"to"
+		},
+			{
+			"arabic"	:	"3an",
+			"arabic2"	:	"عَن",
+			"arabic3"	:	"عن",
+			"aurl"		:	"http://www.arabictree.com/prepositions-huruwf-ul-jarr/",
+			"english"	:	"about"
+		},
+			{
+			"arabic"	:	"3ala",
+			"arabic2"	:	"عَلَى",
+			"arabic3"	:	"على",
+			"aurl"		:	"http://www.arabictree.com/prepositions-huruwf-ul-jarr/",
+			"english"	:	"on"
+		},
+			{
+			"arabic"	:	"fi",
+			"arabic2"	:	"فِي",
+			"arabic3"	:	"في",
+			"aurl"		:	"http://www.arabictree.com/prepositions-huruwf-ul-jarr/",
+			"english"	:	"in"
+		},
+			{
+			"arabic"	:	"ma3a",
+			"arabic2"	:	"مَعَ",
+			"arabic3"	:	"مع",
+			"aurl"		:	"http://www.arabictree.com/prepositions-huruwf-ul-jarr/",
+			"english"	:	"with"
+		}		]
+	},
+	{
+		"listtitle"	:	"Interrogatives",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"man?",
+			"arabic2"	:	"مَن",
+			"arabic3"	:	"من",
+			"aurl"		:	"",
+			"english"	:	"who?"
+		},
+			{
+			"arabic"	:	"kayf?",
+			"arabic3"	:	"كيف",
+			"english"	:	"how?"
+		},
+			{
+			"arabic"	:	"maa?",
+			"arabic2"	:	"ما",
+			"arabic3"	:	"ما",
+			"aurl"		:	"http://www.arabicgenie.com/2013/05/arabic-question-words",
+			"english"	:	"what? (when no verb)"
+		},
+			{
+			"arabic"	:	"maadhaa?",
+			"arabic2"	:	"ماذا",
+			"arabic3"	:	"ماذا",
+			"english"	:	"what? (when verb)"
+		},
+			{
+			"arabic"	:	"limaadhaa?",
+			"arabic3"	:	"لماذا؟",
+			"aurl"		:	"http://www.memrise.com/mem/108992/think-about-finding-out-that-your-mother-didnt-tel/",
+			"english"	:	"why?"
+		},
+			{
+			"arabic"	:	"ayn?",
+			"arabic2"	:	"اين",
+			"arabic3"	:	"اين",
+			"english"	:	"where?"
+		},
+			{
+			"arabic"	:	"mata?",
+			"arabic3"	:	"متى؟",
+			"english"	:	"when?"
+		}		]
+	},
+	{
+		"listtitle"	:	"Easy sentences",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"anaa 6aalib/6aalibah.",
+			"arabic2"	:	"أنا طالِبْ/طالِبة",
+			"arabic3"	:	"أنا طالب/طالبة",
+			"english"	:	"I am a student (M/F)"
+		},
+			{
+			"arabic"	:	"hiya ustaadhah.",
+			"arabic2"	:	"هِيَ أسْتاذة",
+			"arabic3"	:	"هي أستاذة",
+			"english"	:	"She is a teacher."
+		},
+			{
+			"arabic"	:	"huwa amriki.",
+			"arabic2"	:	"هُوَ الأمْرِيكِي",
+			"arabic3"	:	"هو الأمريكي",
+			"english"	:	"He is American."
+		},
+			{
+			"arabic"	:	"Faa6imah 3arabiah.",
+			"arabic2"	:	"فاطِمة العرَبِية",
+			"arabic3"	:	"فاطمة العربية",
+			"english"	:	"Fatima is Arab."
+		},
+			{
+			"arabic"	:	"kitaab kabir.",
+			"arabic2"	:	"كِتاب كَبِير",
+			"arabic3"	:	"كتاب كبير",
+			"english"	:	"The book is big."
+		},
+			{
+			"arabic"	:	"huwa 6awiil.",
+			"arabic2"	:	"هُوَ طَوِيل",
+			"arabic3"	:	"هو طويل",
+			"english"	:	"He is tall."
+		},
+			{
+			"arabic"	:	"Muhammad tawiil wa dhakii wa jamiil.",
+			"english"	:	"Muhammad is tall, smart, and handsome."
+		},
+			{
+			"arabic"	:	"Zaid 6aalib fi Stanford.",
+			"english"	:	"Zaid is a student in (at) Stanford."
+		},
+			{
+			"arabic"	:	"Rania 6aaliba muntazah.",
+			"english"	:	"Rania is an excellent student."
+		},
+			{
+			"arabic"	:	"Hani fi Kalifornia.",
+			"arabic3"	:	"هاني في كاليفورنيا",
+			"english"	:	"Hani is in California."
+		},
+			{
+			"arabic"	:	"ismi Ahmed wa ismuhaa Khadija.",
+			"arabic3"	:	"اسمي أحمد واسمها خديجة",
+			"english"	:	"My name is Ahmed and her name is Khadija."
+		},
+			{
+			"arabic"	:	"Ahmed lubnaanii wa Khadija faransiiah.",
+			"arabic3"	:	"أحمد لبناني وخديجة الفرنسية.",
+			"english"	:	"Ahmed is Lebanese and Khadija is French."
+		},
+			{
+			"arabic"	:	"kayf Mu96afa?",
+			"arabic2"	:	"كَيف مُصْطَفى؟",
+			"arabic3"	:	"كيف مصطفى؟",
+			"english"	:	"How is Mustafa?"
+		},
+			{
+			"arabic"	:	"ayn huwa?",
+			"arabic2"	:	"أين هُوَ؟",
+			"arabic3"	:	"أين هو؟",
+			"english"	:	"Where is he?"
+		},
+			{
+			"arabic"	:	"man anta?",
+			"arabic2"	:	"مَن أنتَ؟",
+			"arabic3"	:	"من أنت؟",
+			"aurl"		:	"http://arabicdesert-sky.net/q_question.html",
+			"english"	:	"Who are you? (M)"
+		}		]
+	}
+	]
+},
+{
+	"grouptitle"	:	"Arab Idol",
+	"lists"		:
+	[
+	{
+		"listtitle"	:	"Formal numbers",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"9ifr",
+			"arabic2"	:	"صِفْر",
+			"arabic3"	:	"٠",
+			"aurl"		:	"https://www.youtube.com/watch?v=JPJ-nOiW87U",
+			"english"	:	"zero"
+		},
+			{
+			"arabic"	:	"waa7id",
+			"arabic2"	:	"واحِد",
+			"arabic3"	:	"١",
+			"aurl"		:	"https://www.youtube.com/watch?v=lJXMQed8TmM",
+			"english"	:	"one"
+		},
+			{
+			"arabic"	:	"ithnayn",
+			"arabic2"	:	"إِثنَيْن",
+			"arabic3"	:	"٢",
+			"aurl"		:	"https://www.youtube.com/watch?v=BXgTQxcgzgg",
+			"english"	:	"two"
+		},
+			{
+			"arabic"	:	"thalaathah",
+			"arabic2"	:	"ثَلاثة",
+			"arabic3"	:	"٣",
+			"aurl"		:	"https://www.youtube.com/watch?v=KYSwyXvHqNU",
+			"english"	:	"three"
+		},
+			{
+			"arabic"	:	"arb3ah",
+			"arabic2"	:	"أَرْبَعة",
+			"arabic3"	:	"٤",
+			"english"	:	"four"
+		},
+			{
+			"arabic"	:	"khamsah",
+			"arabic2"	:	"خَمْسة",
+			"arabic3"	:	"٥",
+			"english"	:	"five"
+		},
+			{
+			"arabic"	:	"sittah",
+			"arabic2"	:	"سِتَّة",
+			"arabic3"	:	"٦",
+			"english"	:	"six"
+		},
+			{
+			"arabic"	:	"sab3ah",
+			"arabic2"	:	"سَبْعة",
+			"arabic3"	:	"٧",
+			"english"	:	"seven"
+		},
+			{
+			"arabic"	:	"thamaaniyah",
+			"arabic2"	:	"ثَمانِية",
+			"arabic3"	:	"٨",
+			"english"	:	"eight"
+		},
+			{
+			"arabic"	:	"tis3ah",
+			"arabic2"	:	"تَسْعة",
+			"arabic3"	:	"٩",
+			"english"	:	"nine"
+		},
+			{
+			"arabic"	:	"3asharah",
+			"arabic2"	:	"عَشَرة",
+			"arabic3"	:	"١٠",
+			"aurl"		:	"https://www.youtube.com/watch?v=2iwcaVUAK_4",
+			"english"	:	"ten"
+		}		]
+	},
+	{
+		"listtitle"	:	"Names",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"fara7",
+			"arabic2"	:	"فَرَح",
+			"arabic3"	:	"فرح",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Farah_(name)",
+			"english"	:	"Farah (M/F) &quot;joy&quot;"
+		},
+			{
+			"arabic"	:	"faa6imah",
+			"arabic2"	:	"فاطِمة",
+			"arabic3"	:	"فاطمة",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Fatimah",
+			"english"	:	"Fatima (F) &quot;abstain&quot;"
+		},
+			{
+			"arabic"	:	"ahmad",
+			"arabic2"	:	"أحمَد",
+			"arabic3"	:	"أحمد",
+			"aurl"		:	"http://www.behindthename.com/name/ahmad",
+			"english"	:	"Ahmad (M) &quot;more commendable&quot;"
+		}		]
+	},
+	{
+		"listtitle"	:	"Cities/Countries",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"mudina",
+			"arabic2"	:	"مُدينة",
+			"arabic3"	:	"مدينة",
+			"aurl"		:	"http://en.wikipedia.org/wiki/List_of_largest_cities_in_the_Arab_world",
+			"english"	:	"city"
+		},
+			{
+			"arabic"	:	"balad",
+			"arabic2"	:	"بَلَد",
+			"arabic3"	:	"بلد",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Arab_world",
+			"english"	:	"country"
+		},
+			{
+			"arabic"	:	"mi9r",
+			"arabic2"	:	"مِصر",
+			"arabic3"	:	"مصر",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Egypt",
+			"english"	:	"Egypt"
+		},
+			{
+			"arabic"	:	"al-qaahirah",
+			"arabic2"	:	"القاهِرة",
+			"arabic3"	:	"القاهرة",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Cairo",
+			"english"	:	"Cairo"
+		},
+			{
+			"arabic"	:	"tuunis",
+			"arabic2"	:	"تُونِس",
+			"arabic3"	:	"تونس",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Tunisia",
+			"english"	:	"Tunisia"
+		},
+			{
+			"arabic"	:	"lubnaan",
+			"arabic2"	:	"لُبْنان",
+			"arabic3"	:	"لبنان",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Lebanon",
+			"english"	:	"Lebanon"
+		},
+			{
+			"arabic"	:	"suuryaa",
+			"arabic2"	:	"سُوريَا",
+			"arabic3"	:	"سوريا",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Syria",
+			"english"	:	"Syria"
+		},
+			{
+			"arabic"	:	"dimashq",
+			"arabic2"	:	"دِمَشْق",
+			"arabic3"	:	"دمشق",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Damascus",
+			"english"	:	"Damascus"
+		},
+			{
+			"arabic"	:	"liibyaa",
+			"arabic2"	:	"لِيبْيَا",
+			"arabic3"	:	"ليبيا",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Libya",
+			"english"	:	"Libya"
+		},
+			{
+			"arabic"	:	"al-3rdun",
+			"arabic2"	:	"الأرْدُن",
+			"arabic3"	:	"الأردن",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Jordan",
+			"english"	:	"Jordan"
+		},
+			{
+			"arabic"	:	"ad-duu7ah",
+			"arabic2"	:	"الدوحة",
+			"arabic3"	:	"الدوحة",
+			"aurl"		:	"http://en.wikipedia.org/wiki/Doha",
+			"english"	:	"Doha"
+		}		]
+	},
+	{
+		"listtitle"	:	"Short words",
+		"entries"	:
+		[
+			{
+			"arabic"	:	"baab",
+			"arabic2"	:	"باب",
+			"arabic3"	:	"باب",
+			"aurl"		:	"http://blog.arabiansinbad.com/bab-in-arabic-vs-door-in-english",
+			"english"	:	"door"
+		}		]
+	}
+	]
+}
+]

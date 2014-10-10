@@ -1,0 +1,51 @@
+<script src="/js/scripts-common.js"></script>
+<script>
+//
+// Programmer:		Craig Stuart Sapp <craig@ccrma.stanford.edu>
+// Creation Date:	Tue Oct  7 14:33:21 PDT 2014
+// Last Modified:	Tue Oct  7 14:33:23 PDT 2014
+// Filename:		.../about/scripts-local.html
+// Web Address:	http://arabic.sapp.org/about/scripts-local.html
+// Syntax:			JavaScript 1.8/ECMAScript 5
+// vim:				ts=3: ft=javascript
+//
+// Description:   JavaScript management of the about page.
+//
+
+
+//////////////////////////////
+//
+// $(document).ready -- Run this code after the document has been loaded.
+//		jQuery Equivalent to 
+//		document.addEventListener("DOMContentLoaded", function(){}, false).
+//
+
+$(document).ready(function() {
+	DecorateHeaderFooterLinks();
+	makeQueryLinks();
+	document.body.style.visibility = "";
+});
+
+
+
+//////////////////////////////
+//
+// makeQueryLinks --
+//
+
+function makeQueryLinks() {
+   var queries = $(".query").toArray();
+	var i;
+	var out;
+	for (i=0; i<queries.length; i++) {
+		out = "<a href=\"/search?q=" 
+		out += encodeURIComponent(queries[i].textContent);
+		out += "\">" + queries[i].textContent + "</a>";
+		queries[i].innerHTML = out;
+	}
+}
+
+
+
+
+</script>

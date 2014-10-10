@@ -1,0 +1,15 @@
+!!!OTL: Cities/Countries
+!! vim:	ts=12 ft=humdrum nowrap
+**english	**arabic	**arabic2	**arabic3	**aurl
+city	mudina	مُدينة	مدينة	http://en.wikipedia.org/wiki/List_of_largest_cities_in_the_Arab_world
+country	balad	بَلَد	بلد	http://en.wikipedia.org/wiki/Arab_world
+Egypt	mi9r	مِصر	مصر	http://en.wikipedia.org/wiki/Egypt
+Cairo	al-qaahirah	القاهِرة	القاهرة	http://en.wikipedia.org/wiki/Cairo
+Tunisia	tuunis	تُونِس	تونس	http://en.wikipedia.org/wiki/Tunisia
+Lebanon	lubnaan	لُبْنان	لبنان	http://en.wikipedia.org/wiki/Lebanon
+Syria	suuryaa	سُوريَا	سوريا	http://en.wikipedia.org/wiki/Syria
+Damascus	dimashq	دِمَشْق	دمشق	http://en.wikipedia.org/wiki/Damascus
+Libya	liibyaa	لِيبْيَا	ليبيا	http://en.wikipedia.org/wiki/Libya
+Jordan	al-3rdun	الأرْدُن	الأردن	http://en.wikipedia.org/wiki/Jordan
+Doha	ad-duu7ah	الدوحة	الدوحة	http://en.wikipedia.org/wiki/Doha
+*-	*-	*-	*-	*-

@@ -1,0 +1,235 @@
+
+<article class="about first">
+<h2> About </h2>
+
+<p>
+
+This website is my digital notebook for an
+introductory Arabic language class taught by <a
+href="https://dlcl.stanford.edu/people/ramzi-salti?q=people/ramzi-salti"
+target=new>Ramzi Salti</a> at Stanford University.  The website is used
+to study the weekly vocabulary assignments.  The main page has groups
+of word lists which can be navigated by clicking on the entries in the
+sidebar on the main page.
+
+</p>
+
+<p>
+
+The main page has several keyboard commands:
+
+<table class="keylist">
+
+<colgroup>
+<col style="width:80px; background:#eee;">
+<col>
+</colgroup>
+
+<tr>	<td>A</td>
+	<td>Toggle visibility of <span class="purple">Arabic</span> 
+	word column.</td>
+</tr>
+
+<tr>	<td>E</td>
+	<td>Toggle visibility of <span class="purple">English</span>
+	word column.</td>
+</tr>
+
+<tr>	<td>F</td>
+	<td><span class="purple">Flip</span> order Arabic/English 
+	word columns.</td>
+</tr>
+
+<tr>	<td>M</td>
+	<td><span class="purple">Mirror</span> 
+	transliterated Arabic words.</td>
+</tr>
+
+<tr>	<td>R</td>
+	<td><span class="purple">Randomize</span>/unrandomize display 
+		order for word list.  When randomizing is turned on, 
+		clicking on the current wordlist title on the right 
+		will re-randomize the current list.
+	</td>
+</tr>
+
+<tr>	<td>X</td>
+	<td><span class="purple">Exchange</span> visibility of 
+	both Arabic and English columns.</td>
+</tr>
+
+<tr>	<td>1</td>
+	<td>Toggle display of Arabic <span class="purple">transliteration</span>
+	</td>
+</tr>
+
+<tr>	<td>2</td>
+	<td>Toggle display of Arabic text
+	<span class="purple">with vocalizations</span>
+	</td>
+</tr>
+
+<tr>	<td>3</td>
+	<td>Toggle display of Arabic text
+	<span class="purple">without vocalizations</span>
+	</td>
+</tr>
+
+<tr>	<td>shift-&darr;</td>
+	<td>Go to next word list.</td>
+</tr>
+
+<tr>	<td>shift-&uarr;</td>
+	<td>Go to previous word list.</td>
+</tr>
+
+<tr>	<td>shift-&rarr;</td>
+	<td>Go to next list group.</td>
+</tr>
+
+<tr>	<td>shift-&larr;</td>
+	<td>Go to previous list group.</td>
+</tr>
+
+<tr>	<td>ctrl-bckspc</td>
+	<td>Clear search box for a new search 
+	(initially shows all vocabulary).</td>
+</tr>
+<tr>	<td>click</td>
+	<td>Toggle visibility of a single Arabic/English vocabulary cell.</td>
+</tr>
+
+<tr>	<td>ctrl-click</td>
+	<td>Using any auxiliary key (control, alt, shift, command, window)
+	allows you to select text for copying or to click on a hyperlink.
+	</td>
+</tr>
+
+</table>
+</p>
+
+<p>
+In addition, clicking on the table headers "Arabic" and "English" will
+toggle the column's visibility, similar to the "A" and "E" commands.
+
+</p>
+
+</article>
+
+
+
+<article class="about first">
+<h2> Searching </h2>
+
+<p>
+
+The search field on the top right of the page will search for Arabic
+or English words/phrases which contain the text typed into this field.
+The searches are done ignoring the case of the letters, so upper or lower
+case letters can be used.  If you press backspace in the search field
+until it becomes empty, a list of all vocabulary entries will be shown.
+The above keyboard commands also operate on the search-results page.
+
+</p>
+
+<p>
+
+When searching specifically for the transliteration of "<span class=query>ح</span>", use the <a
+href=http://en.wikipedia.org/wiki/Arabic_chat_alphabet target=new>Arabic
+chat alphabet</a> letter "<span class=query>7</span>". 
+Likwise, 
+"<span class=query>6</span>" 
+can be used to search specifically for 
+"<span class=query>ط</span>", and
+"<span class=query>9</span>" for
+"<span class=query>ص</span>" in transliterations.
+
+</p>
+
+<p>
+
+The search field accepts <a target=new
+href=http://en.wikipedia.org/wiki/Regular_expression>regular
+expressions</a>.  Here are some example uses of regular expressions (click
+on the search queries to see the resulting matches).
+
+
+<table class="keylist">
+<colgroup>
+<col style="width:80px; background:#eee;">
+<col>
+</colgroup>
+
+<tr>
+	<td class=query>^q</td>
+	<td>Find entries starting with the letter "q".</td>
+</tr>
+
+<tr>
+	<td class=query>\bq</td>
+	<td>Find <i>words</i> starting with the letter "q". "\b" means a word
+	 must stop or start at this point in the match (stands for
+	word "boundary").</td>
+</tr>
+
+<tr>
+	<td class=query>\bhe\b</td>
+	<td>Find word "he".</td>
+</tr>
+
+<tr>
+	<td class=query>\wq</td>
+	<td>Find words that contain "q", but not at start of word. "\w" means
+	the opposite of "\b": the word cannot start or stop at this point
+	in the match.</td>
+</tr>
+
+<tr>
+	<td class=query>qa+si+r</td>
+	<td>Match to "qasir", "qaasir", "qasiir", or "qaasiir".</td>
+</tr>
+
+<tr>
+	<td class=query>k[aeiouyw]*t+[aeiouyw]*b</td>
+	<td>Find consonant sequence "KTB" within a word with any 
+	number of vowels between the letters, allowing for the T 
+	to be doubled.</td>
+</tr>
+
+<tr>
+	<td class=query>his|her</td>
+	<td>Find entries which have either "his" or "her" (or both of them).
+</tr>
+
+<tr>
+	<td class=query>\bhis\b|\bher\b</td>
+	<td>Find entries which have either or both complete words "his" or "her".
+</tr>
+
+<tr>
+	<td class=query>بكم</td>
+	<td>Arabic words can also be searched for.</td>
+</tr>
+
+</table>
+
+</p>
+
+</article>
+
+
+
+<article style="padding-bottom:50px;" class="about first">
+<h2> Links </h2>
+
+<p> 
+
+The <a href="/links">Links page</a> list various useful websites for
+introductory level Arabic students.
+
+</p>
+
+</article>
+
+
+
